@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gclasscn.resource.dao.CloudDiskDAO">
+
+	<select id="listLinks" resultType="CloudDisk">
+		select <include refid="cloudDiskColumns" />
+		from cloud_disk_t cd
+		<if test="query != null and query != ''">
+			where cd.name like concat("%", #{query}, "%")
+		</if>
+		limit #{start}, #{size}
+	</select>
+	
+	<select id="countLinks" resultType="int">
+		select count(1)
+		from cloud_disk_t cd
+		<if test="query != null and query != ''">
+			where cd.name like concat("%", #{query}, "%")
+		</if>
+	</select>
+	
+	<delete id="removeLinkById">
+		delete from cloud_disk_t where id = #{linkId}
+	</delete>
+	
+	<insert id="saveLink">
+		insert into cloud_disk_t(name, link, code, res_info)
+		values(#{name}, #{link}, #{code}, #{resInfo})
+	</insert>
+	
+	<sql id="cloudDiskColumns">
+		cd.id,
+		cd.name,
+		cd.link,
+		cd.code,
+		cd.res_info as resInfo
+	</sql>
+	
+</mapper>

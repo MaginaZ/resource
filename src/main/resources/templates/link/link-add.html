@@ -1,0 +1,56 @@
+<div class="content-wrapper">
+	<section class="content-header">
+		<h1>添加资源链接</h1>
+	</section>
+	<section class="content">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<div class="box box-info">
+						<div class="box-header with-border">
+							<h3 class="box-title">填写链接信息</h3>
+						</div>
+						<form class="form-horizontal" id="organize">
+							<div class="box-body col-xs-12">
+								<div class="form-group">
+									<label class="col-sm-1 control-label">
+										<span class="my-red">*</span>名称
+									</label>
+									<div class="col-sm-11">
+										<input maxlength="50" class="form-control" id="name" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-1 control-label">
+										<span class="my-red">*</span>链接
+									</label>
+									<div class="col-sm-11">
+										<input maxlength="100" class="form-control" id="link" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-1 control-label">提取码</label>
+									<div class="col-sm-11">
+										<input maxlength="10" class="form-control" id="code" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-1 control-label">详情</label>
+									<div class="col-sm-11">
+										<textarea class="form-control" id="res-info" rows="6" cols="4"></textarea>
+									</div>
+								</div>
+							</div>
+							<div class="box-footer">
+								<button type="button" class="btn btn-default j-back">返回</button>
+								<button type="button" class="btn btn-info pull-right j-save">保存</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+
+<script th:src="@{/js/link/link-add.js}"></script>

@@ -1,0 +1,57 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <h1>云盘链接管理</h1>
+    </section>
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <div class="row">
+                            <button id="link-add" type="button" class="btn btn-info pull-left" style="margin-left: 30px;">添加资源链接</button>
+                            <form class="col-xs-3 pull-right">
+                                <div class="input-group">
+                                    <input id="search-input" class="form-control" placeholder="链接名称" />
+                                    <span class="input-group-btn">
+                                        <button id="search-btn" class="btn btn-info" type="button">搜索</button>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="box-body m-mi-he">
+                        <table class="table table-bordered table-hover table-condensed table-striped text-center">
+                            <thead>
+	                             <tr>
+	                                 <th>资源名称</th>
+	                                 <th>资源链接</th>
+	                                 <th>提取码</th>
+	                                 <th>操作</th>
+	                             </tr>
+                            </thead>
+                            <tbody id="linkContent"></tbody>
+                        </table>
+                        <section class="page pull-right">
+							<ul id="pagination" class="pagination"></ul>
+                       	</section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script th:src="@{/js/link/link.js}"></script>
+
+<script id="linkTmpl" type="text/x-jquery-tmpl">
+{{each(i, link) links}}
+	<tr>
+    	<td>${name}</td>
+        <td>${link}</td>
+		<td>${code}</td>
+        <td>
+	        <button id="${id}" type="button" class="btn btn-danger btn-xs j-delete">删除</button>
+	    </td>
+	</tr>
+{{/each}}
+</script>
