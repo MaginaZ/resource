@@ -8,6 +8,7 @@
 		<if test="query != null and query != ''">
 			where cd.name like concat("%", #{query}, "%")
 		</if>
+		order by cd.id desc
 		limit #{start}, #{size}
 	</select>
 	
@@ -19,6 +20,12 @@
 		</if>
 	</select>
 	
+	<select id="getLinkById" resultType="CloudDisk">
+		select <include refid="cloudDiskColumns" />
+		from cloud_disk_t cd
+		where cd.id = #{linkId}
+	</select>
+	
 	<delete id="removeLinkById">
 		delete from cloud_disk_t where id = #{linkId}
 	</delete>
@@ -27,6 +34,15 @@
 		insert into cloud_disk_t(name, link, code, res_info)
 		values(#{name}, #{link}, #{code}, #{resInfo})
 	</insert>
+	
+	<update id="updateLink">
+		update cloud_disk_t set
+			name = #{name},
+			link = #{link},
+			code = #{code},
+			res_info = #{resInfo}
+		where id = #{id}
+	</update>
 	
 	<sql id="cloudDiskColumns">
 		cd.id,

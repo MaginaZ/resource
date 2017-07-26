@@ -29,6 +29,13 @@ open class CloudDiskService {
 		return 0
 	}
 	
+	open fun getLinkById(linkId: Long) : CloudDisk {
+		if (cloudDiskDao != null) {
+			return cloudDiskDao.getLinkById(linkId)
+		}
+		return CloudDisk()
+	}
+	
 	@Transactional
 	open fun removeLinkById(linkId: Long) {
 		if (cloudDiskDao != null) {
@@ -40,6 +47,13 @@ open class CloudDiskService {
 	open fun saveLink(cloudDisk: CloudDiskDTO) {
 		if (cloudDiskDao != null) {
 			cloudDiskDao.saveLink(cloudDisk)
+		}
+	}
+	
+	@Transactional
+	open fun updateLink(cloudDisk: CloudDiskDTO) {
+		if (cloudDiskDao != null) {
+			cloudDiskDao.updateLink(cloudDisk)
 		}
 	}
 }

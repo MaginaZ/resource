@@ -115,4 +115,11 @@ $(function () {
     $("#link-add").click(function(){
     	window.location.href = contextPath + "link-add";
     })
+    
+    /**
+     * 修改资源链接
+     */
+    $("#linkContent").on("click", ".j-update", function(){
+    	window.location.href = contextPath + "link-update?linkId=" + $(this).prop("id");
+    })
 });

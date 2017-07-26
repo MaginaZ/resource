@@ -12,7 +12,11 @@ interface CloudDiskDAO {
 	
 	fun countLinks(@Param("query") query: String?) : Int
 	
+	fun getLinkById(@Param("linkId") linkId: Long) : CloudDisk
+	
 	fun removeLinkById(@Param("linkId") linkId: Long)
 	
 	fun saveLink(cloudDisk: CloudDiskDTO)
+	
+	fun updateLink(cloudDisk: CloudDiskDTO)
 }
