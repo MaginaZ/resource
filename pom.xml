@@ -81,7 +81,7 @@
 	<build>
 		<sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
 		<testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>
-		<finalName>base</finalName>
+		<finalName>resource</finalName>
 		<plugins>
 			<plugin>
 	            <artifactId>kotlin-maven-plugin</artifactId>
