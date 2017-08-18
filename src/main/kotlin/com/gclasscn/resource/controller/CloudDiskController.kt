@@ -55,7 +55,6 @@ class CloudDiskController {
 	 */
 	@RequestMapping(value = "/link-update", method = arrayOf(RequestMethod.GET))
 	fun linkUpdatePage(model: Model, linkId: Long) : String {
-		model.addAttribute("linkId", linkId)
 		model.addAttribute("link", cloudDiskService.getLinkById(linkId))
 		return "link/link-update"
 	}
@@ -64,6 +63,15 @@ class CloudDiskController {
 	fun updateLink(id: Long, name: String, link: String, code: String?, resInfo: String?) : Int {
 		cloudDiskService.updateLink(CloudDiskDTO(id, name, link, code, resInfo))
 		return HttpStatus.CREATED.value()
+	}
+	
+	/**
+	 * 资源链接详情
+	 */
+	@RequestMapping(value = "/link-info", method = arrayOf(RequestMethod.GET))
+	fun linkInfo(model: Model, linkId: Long) : String {
+		model.addAttribute("link", cloudDiskService.getLinkById(linkId))
+		return "link/link-info"
 	}
 	
 	/**
