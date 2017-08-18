@@ -8,11 +8,12 @@ import com.gclasscn.resource.service.CloudDiskService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Controller
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestMethod
-import org.springframework.web.bind.annotation.ResponseBody
-import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.ui.Model
+import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
+import org.springframework.web.bind.annotation.ResponseBody
 
 @Controller
 class CloudDiskController {
@@ -23,9 +24,10 @@ class CloudDiskController {
 	/**
 	 * 资源链接列表
 	 */
-	@RequestMapping(value = "/", method = arrayOf(RequestMethod.GET))
+	@GetMapping("/")
 	fun linkLiskPage() = "link/link-list"
-	@RequestMapping(value = "/links", method = arrayOf(RequestMethod.GET))
+	
+	@GetMapping("/links")
 	@ResponseBody
 	fun listLinks(pageNum: Int, size: Int, query: String?) : PageList<CloudDisk> {
 		
@@ -41,9 +43,10 @@ class CloudDiskController {
 	/**
 	 * 添加资源链接
 	 */
-	@RequestMapping(value = "/link-add", method = arrayOf(RequestMethod.GET))
+	@GetMapping("/link-add")
 	fun linkAddPage() = "link/link-add"
-	@RequestMapping(value = "/links",  method = arrayOf(RequestMethod.POST))
+	
+	@PostMapping("/links")
 	@ResponseBody
 	fun saveLink(name: String, link: String, code: String?, resInfo: String?) : Int {
 		cloudDiskService.saveLink(CloudDiskDTO(name, link, code, resInfo))
@@ -53,12 +56,12 @@ class CloudDiskController {
 	/**
 	 * 修改资源链接
 	 */
-	@RequestMapping(value = "/link-update", method = arrayOf(RequestMethod.GET))
+	@GetMapping("/link-update")
 	fun linkUpdatePage(model: Model, linkId: Long) : String {
 		model.addAttribute("link", cloudDiskService.getLinkById(linkId))
 		return "link/link-update"
 	}
-	@RequestMapping(value = "/links",  method = arrayOf(RequestMethod.PUT))
+	@PutMapping("/links")
 	@ResponseBody
 	fun updateLink(id: Long, name: String, link: String, code: String?, resInfo: String?) : Int {
 		cloudDiskService.updateLink(CloudDiskDTO(id, name, link, code, resInfo))
@@ -68,7 +71,7 @@ class CloudDiskController {
 	/**
 	 * 资源链接详情
 	 */
-	@RequestMapping(value = "/link-info", method = arrayOf(RequestMethod.GET))
+	@GetMapping("/link-info")
 	fun linkInfo(model: Model, linkId: Long) : String {
 		model.addAttribute("link", cloudDiskService.getLinkById(linkId))
 		return "link/link-info"
@@ -77,7 +80,7 @@ class CloudDiskController {
 	/**
 	 * 删除资源链接
 	 */
-	@RequestMapping(value = "/links", method = arrayOf(RequestMethod.DELETE))
+	@DeleteMapping("/links")
 	@ResponseBody
 	fun removeLink(linkId: Long) : Int {
 		cloudDiskService.removeLinkById(linkId)
