@@ -65,14 +65,14 @@ object Main {
 	 * 下载图片
 	 */
 	private fun download(name: String, start: Int, imgSrcs: List<String>){
-		var dir = File("G:/$name")
+		var dir = File("E:/$name")
 		if(!dir.exists()){
 			dir.mkdir()
 		}
 		println("开始下载")
 		var count = 0;
 		for ((index, src) in imgSrcs.withIndex()) {
-			var file = File("G:/$name/${start + index}.jpg")
+			var file = File("E:/$name/${start + index}.jpg")
 			try {
 				var url = URL(src)
 				url.openStream().use {

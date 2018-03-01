@@ -16,7 +16,7 @@ logging:
     file: logs/resource.log
 
 database:
-    host: 120.27.216.198
+    host: 192.168.18.13
     port: 3306
     name: base
 
