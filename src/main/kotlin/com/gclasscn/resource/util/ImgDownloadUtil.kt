@@ -1,11 +1,9 @@
 package com.gclasscn.kotlin
 
-import java.util.regex.Pattern
-import java.util.regex.Matcher
-import kotlin.jvm.JvmStatic
-import java.net.URL
-import java.io.FileOutputStream
 import java.io.File
+import java.net.HttpURLConnection
+import java.net.URL
+import java.util.regex.Pattern
 
 object Main {
 
@@ -16,7 +14,7 @@ object Main {
 	
 	@JvmStatic fun main(args: Array<String>) {
 		//获得html文本内容  
-		var html = getHtml("http://www.sj33.cn/sc/png/")
+		var html = getHtml("http://www.baidu.com")
 		//获取图片标签  
 		var imgNodes = listImageNodes(html)
 		//获取图片src地址  
@@ -75,7 +73,9 @@ object Main {
 			var file = File("E:/$name/${start + index}.jpg")
 			try {
 				var url = URL(src)
-				url.openStream().use {
+				var connection = url.openConnection() as HttpURLConnection 
+				connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0"); //防止报403错误。
+				connection.getInputStream().use {
 					file.writeBytes(it.readBytes())
 				}
 				count = start + index
