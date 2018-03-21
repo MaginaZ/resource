@@ -73,7 +73,7 @@ object Main {
 			var file = File("E:/$name/${start + index}.jpg")
 			try {
 				var url = URL(src)
-				var connection = url.openConnection() as HttpURLConnection 
+				var connection = url.openConnection()
 				connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0"); //防止报403错误。
 				connection.getInputStream().use {
 					file.writeBytes(it.readBytes())
