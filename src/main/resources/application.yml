@@ -3,8 +3,8 @@ server:
     context-path: /resource
 
 mybatis:
-    mapperLocations: classpath:/com/gclasscn/resource/mapper/*.xml
-    typeAliasesPackage: com.gclasscn.resource.domain
+    mapperLocations: classpath:/com/magina/resource/mapper/*.xml
+    typeAliasesPackage: com.magina.resource.domain
 
 logging:
     level:
@@ -16,16 +16,16 @@ logging:
     file: logs/resource.log
 
 database:
-    host: 192.168.18.13
+    host: 10.1.1.7
     port: 3306
-    name: base
+    name: common
 
 spring:
     datasource:
         initialize: false
         url: jdbc:mysql://${database.host}:${database.port}/${database.name}?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
         username: root
-        password: root
+        password: 123456
         driver-class-name: com.mysql.jdbc.Driver
         maxActive: 1000
         initialSize: 10

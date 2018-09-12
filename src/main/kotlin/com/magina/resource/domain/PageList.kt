@@ -1,4 +1,4 @@
-package com.gclasscn.resource.domain
+package com.magina.resource.domain
 
 import java.util.ArrayList
 

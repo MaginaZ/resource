@@ -1,4 +1,4 @@
-package com.gclasscn.resource.config
+package com.magina.resource.config
 
 import nz.net.ultraq.thymeleaf.LayoutDialect
 import org.springframework.beans.factory.annotation.Autowired

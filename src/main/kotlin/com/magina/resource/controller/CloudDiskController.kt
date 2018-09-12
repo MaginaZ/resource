@@ -1,10 +1,10 @@
-package com.gclasscn.resource.controller
+package com.magina.resource.controller
 
-import com.gclasscn.resource.domain.CloudDisk
-import com.gclasscn.resource.domain.CloudDiskDTO
-import com.gclasscn.resource.domain.PageList
-import com.gclasscn.resource.domain.RequestParam
-import com.gclasscn.resource.service.CloudDiskService
+import com.magina.resource.domain.CloudDisk
+import com.magina.resource.domain.CloudDiskDTO
+import com.magina.resource.domain.PageList
+import com.magina.resource.domain.RequestParam
+import com.magina.resource.service.CloudDiskService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Controller

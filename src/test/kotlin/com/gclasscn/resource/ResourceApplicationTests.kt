@@ -1,4 +1,4 @@
-package com.gclasscn.resource
+package com.magina.resource
 
 import org.junit.Test
 import org.junit.runner.RunWith

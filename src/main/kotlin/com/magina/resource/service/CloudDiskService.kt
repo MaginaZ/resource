@@ -1,9 +1,9 @@
-package com.gclasscn.resource.service
+package com.magina.resource.service
 
-import com.gclasscn.resource.dao.CloudDiskDAO
-import com.gclasscn.resource.domain.CloudDisk
-import com.gclasscn.resource.domain.CloudDiskDTO
-import com.gclasscn.resource.domain.RequestParam
+import com.magina.resource.dao.CloudDiskDAO
+import com.magina.resource.domain.CloudDisk
+import com.magina.resource.domain.CloudDiskDTO
+import com.magina.resource.domain.RequestParam
 import com.google.common.collect.Lists
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service

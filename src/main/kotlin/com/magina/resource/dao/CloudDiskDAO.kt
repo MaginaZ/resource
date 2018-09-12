@@ -1,10 +1,10 @@
-package com.gclasscn.resource.dao
+package com.magina.resource.dao
 
-import com.gclasscn.resource.domain.CloudDisk
-import com.gclasscn.resource.domain.RequestParam
+import com.magina.resource.domain.CloudDisk
+import com.magina.resource.domain.RequestParam
 import org.apache.ibatis.annotations.Mapper
 import org.apache.ibatis.annotations.Param
-import com.gclasscn.resource.domain.CloudDiskDTO
+import com.magina.resource.domain.CloudDiskDTO
 
 @Mapper
 interface CloudDiskDAO {

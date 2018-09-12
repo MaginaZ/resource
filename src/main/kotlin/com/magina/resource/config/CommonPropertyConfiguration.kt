@@ -1,4 +1,4 @@
-package com.gclasscn.resource.config
+package com.magina.resource.config
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 

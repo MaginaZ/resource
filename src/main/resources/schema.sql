@@ -15,5 +15,5 @@ CREATE TABLE IF NOT EXISTS `cloud_disk_t` (
 
 -- 正在导出表  base.cloud_disk_t 的数据：~3 rows (大约)
 INSERT INTO `cloud_disk_t` (`id`, `name`, `link`, `code`) VALUES
-	(3, '余罪第一季', 'http://pan.baidu.com/s/1c2gs86k', 'h84p'),
-	(4, '余罪第二季', 'http://pan.baidu.com/s/1dETztnj', 'kri7');
+    (3, '余罪第一季', 'http://pan.baidu.com/s/1c2gs86k', 'h84p'),
+    (4, '余罪第二季', 'http://pan.baidu.com/s/1dETztnj', 'kri7');
