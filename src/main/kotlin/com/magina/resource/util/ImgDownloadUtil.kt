@@ -1,4 +1,4 @@
-package com.gclasscn.kotlin
+package com.magina.resource.util
 
 import java.io.File
 import java.net.HttpURLConnection

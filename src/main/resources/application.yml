@@ -10,7 +10,7 @@ logging:
     level:
         root: INFO
         com:
-            gclasscn:
+            magina:
                 resource:
                    dao: DEBUG
     file: logs/resource.log
