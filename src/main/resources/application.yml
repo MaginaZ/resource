@@ -2,17 +2,13 @@ server:
     port: 8080
     context-path: /resource
 
-mybatis:
-    mapperLocations: classpath:/com/magina/resource/mapper/*.xml
-    typeAliasesPackage: com.magina.resource.domain
-
 logging:
-    level:
+    level: 
         root: INFO
-        com:
-            magina:
-                resource:
-                   dao: DEBUG
+        org: 
+            hibernate: 
+                SQL: DEBUG
+                type: TRACE
     file: logs/resource.log
 
 database:
@@ -43,6 +39,12 @@ spring:
         cache-period: 0
     template:
         cache: false
+    jpa: 
+        properties: 
+            hibernate: 
+                dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        hibernate: 
+            ddl-auto: update
         
 #layout
 layout: content

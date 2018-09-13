@@ -22,10 +22,10 @@ $(function () {
 				size: size,
 				query: query
 			},
-			success: function(pageList){
+			success: function(page){
 				$("#linkContent").empty();
-				$("#linkTmpl").tmpl({links: pageList.data}).appendTo("#linkContent");
-				pagination(pageList.totalPages);
+				$("#linkTmpl").tmpl({links: page.content}).appendTo("#linkContent");
+				pagination(page.totalPages);
 			}
 		});
 	}

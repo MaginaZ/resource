@@ -1,13 +1,29 @@
 package com.magina.resource.domain;
 
-public class CloudDisk {
+import javax.persistence.Entity;
+
+@Entity
+public class CloudDisk extends Base {
     
-    private Long id;
     private String name;
     private String link;
     private String code;
     private String resInfo;
     
+    public CloudDisk() {}
+    
+    public CloudDisk(String name, String link, String code, String resInfo) {
+        this.name = name;
+        this.link = link;
+        this.code = code;
+        this.resInfo = resInfo;
+    }
+
+    public CloudDisk(Long id, String name, String link, String code, String resInfo) {
+        this(name, link, code, resInfo);
+        this.id = id;
+    }
+
     public Long getId() {
         return id;
     }

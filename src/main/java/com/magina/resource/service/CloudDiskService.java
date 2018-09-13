@@ -1,46 +1,37 @@
 package com.magina.resource.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
-import com.magina.resource.dao.CloudDiskDAO;
 import com.magina.resource.domain.CloudDisk;
-import com.magina.resource.domain.CloudDiskDTO;
-import com.magina.resource.domain.RequestParam;
+import com.magina.resource.repository.CloudDiskRepository;
 
 @Service
 public class CloudDiskService {
     
     @Autowired
-    private CloudDiskDAO cloudDiskDao;
+    private CloudDiskRepository cloudDiskRepo;
     
-    public List<CloudDisk> listLinks(RequestParam param) {
-        return cloudDiskDao.listLinks(param);
+    public Page<CloudDisk> listLinks(Pageable pageable, String query) {
+        return StringUtils.hasText(query) ? cloudDiskRepo.findByNameLike(query, pageable) : cloudDiskRepo.findAll(pageable);
     }
     
-    public int countLinks(String query) {
-        return cloudDiskDao.countLinks(query);
-    }
-    
-    public CloudDisk getLinkById(Long linkId) {
-        return cloudDiskDao.getLinkById(linkId);
+    public CloudDisk getLink(Long id) {
+        return cloudDiskRepo.findOne(id);
     }
     
     @Transactional
-    public void removeLinkById(Long linkId) {
-        cloudDiskDao.removeLinkById(linkId);
+    public void delete(Long id) {
+        cloudDiskRepo.delete(id);
     }
     
     @Transactional
-    public void saveLink(CloudDiskDTO cloudDisk) {
-        cloudDiskDao.saveLink(cloudDisk);
+    public void save(CloudDisk cloudDisk) {
+        cloudDiskRepo.save(cloudDisk);
     }
-    
-    @Transactional
-    public void updateLink(CloudDiskDTO cloudDisk) {
-        cloudDiskDao.updateLink(cloudDisk);
-    }
+
 }

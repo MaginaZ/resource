@@ -1,14 +1,10 @@
 package com.magina.resource.controller;
 
-import com.magina.resource.domain.CloudDisk;
-import com.magina.resource.domain.CloudDiskDTO;
-import com.magina.resource.domain.PageList;
-import com.magina.resource.domain.RequestParam;
-import com.magina.resource.service.CloudDiskService;
-
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.magina.resource.domain.CloudDisk;
+import com.magina.resource.service.CloudDiskService;
 
 @Controller
 public class CloudDiskController {
@@ -34,15 +33,11 @@ public class CloudDiskController {
     
     @GetMapping("/links")
     @ResponseBody
-    public PageList<CloudDisk> listLinks(int pageNum, int size, String query) {
+    public Page<CloudDisk> listLinks(int pageNum, int size, String query) {
         
-        int start = (pageNum - 1) * size;
-        RequestParam param = new RequestParam(start, size, query);
+        Pageable pageable = new PageRequest(pageNum - 1, size, new Sort(Sort.Direction.DESC, "id"));
         
-        int record = cloudDiskService.countLinks(query);
-        List<CloudDisk> links = cloudDiskService.listLinks(param);
-        
-        return new PageList<CloudDisk>(record, size, links);
+        return cloudDiskService.listLinks(pageable, query);
     }
     
     /**
@@ -56,7 +51,7 @@ public class CloudDiskController {
     @PostMapping("/links")
     @ResponseBody
     public int saveLink(String name, String link, String code, String resInfo) {
-        cloudDiskService.saveLink(new CloudDiskDTO(name, link, code, resInfo));
+        cloudDiskService.save(new CloudDisk(name, link, code, resInfo));
         return HttpStatus.CREATED.value();
     }
     
@@ -65,14 +60,14 @@ public class CloudDiskController {
      */
     @GetMapping("/link-update")
     public String linkUpdatePage(Model model, Long linkId) {
-        model.addAttribute("link", cloudDiskService.getLinkById(linkId));
+        model.addAttribute("link", cloudDiskService.getLink(linkId));
         return "link/link-update";
     }
     
     @PutMapping("/links")
     @ResponseBody
     public int updateLink(Long id, String name, String link, String code, String resInfo) {
-        cloudDiskService.updateLink(new CloudDiskDTO(id, name, link, code, resInfo));
+        cloudDiskService.save(new CloudDisk(id, name, link, code, resInfo));
         return HttpStatus.CREATED.value();
     }
     
@@ -81,7 +76,7 @@ public class CloudDiskController {
      */
     @GetMapping("/link-info")
     public String linkInfo(Model model, Long linkId) {
-        model.addAttribute("link", cloudDiskService.getLinkById(linkId));
+        model.addAttribute("link", cloudDiskService.getLink(linkId));
         return "link/link-info";
     }
     
@@ -91,7 +86,7 @@ public class CloudDiskController {
     @DeleteMapping("/links")
     @ResponseBody
     public int removeLink(Long linkId) {
-        cloudDiskService.removeLinkById(linkId);
+        cloudDiskService.delete(linkId);
         return HttpStatus.NO_CONTENT.value();
     }
 }
