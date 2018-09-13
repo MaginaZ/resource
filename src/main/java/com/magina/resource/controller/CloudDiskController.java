@@ -1,5 +1,7 @@
 package com.magina.resource.controller;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -67,6 +69,9 @@ public class CloudDiskController {
     @PutMapping("/links")
     @ResponseBody
     public int updateLink(Long id, String name, String link, String code, String resInfo) {
+        CloudDisk cd = new CloudDisk(id, name, link, code, resInfo);
+        cd.setCreateTime(LocalDateTime.now());
+        cd.setUpdateTime(LocalDateTime.now().plusMinutes(1));
         cloudDiskService.save(new CloudDisk(id, name, link, code, resInfo));
         return HttpStatus.CREATED.value();
     }

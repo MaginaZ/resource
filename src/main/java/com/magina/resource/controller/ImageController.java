@@ -23,14 +23,14 @@ public class ImageController {
      */
     @GetMapping("/images/page")
     public String linkLiskPage() {
-        return "link/link-list";
+        return "image/image-list";
     }
     
     @GetMapping("/images")
     @ResponseBody
     public Page<Image> listLinks(int pageNum, int size, String query) {
         
-        Pageable pageable = new PageRequest(pageNum, size, new Sort(Sort.Direction.DESC, "id"));
+        Pageable pageable = new PageRequest(pageNum - 1, size, new Sort(Sort.Direction.DESC, "id"));
         
         return imageService.listImages(pageable, query);
     }

@@ -1,5 +1,7 @@
 package com.magina.resource.domain;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
 
 @Entity
@@ -17,19 +19,18 @@ public class CloudDisk extends Base {
         this.link = link;
         this.code = code;
         this.resInfo = resInfo;
+        this.createTime = LocalDateTime.now();
     }
 
     public CloudDisk(Long id, String name, String link, String code, String resInfo) {
-        this(name, link, code, resInfo);
         this.id = id;
+        this.name = name;
+        this.link = link;
+        this.code = code;
+        this.resInfo = resInfo;
+        this.updateTime = LocalDateTime.now();
     }
 
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
     public String getName() {
         return name;
     }
