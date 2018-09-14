@@ -51,7 +51,7 @@ public class ImageService {
         
         for (Entry<String, List<Image>> entry : map.entrySet()) {
             String folder = "D:" + File.separator + "图片" + File.separator + entry.getKey();
-            int index = 1;
+            int index = 0;
             for (Image image : images) {
                 String html = getHtml(image.getLink());
                 //获取图片标签  
@@ -59,7 +59,7 @@ public class ImageService {
                 //获取图片src地址  
                 List<String> imgSrcs = listImageSrcs(imgNodes);
                 //下载图片  
-                index = download(folder, index, imgSrcs);
+                index = download(folder, index + 1, imgSrcs);
                 if (index != 0) { //下载成功
                     image.setUsed(true);
                     imageRepository.save(image);
