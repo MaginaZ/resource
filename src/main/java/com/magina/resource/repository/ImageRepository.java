@@ -1,5 +1,7 @@
 package com.magina.resource.repository;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,5 +13,7 @@ import com.magina.resource.domain.Image;
 public interface ImageRepository extends JpaRepository<Image, Long> {
     
     Page<Image> findByNameLike(String name, Pageable pageable);
+    
+    List<Image> findByUsed(boolean used);
     
 }

@@ -55,5 +55,10 @@ public class CloudDisk extends Base {
     public void setResInfo(String resInfo) {
         this.resInfo = resInfo;
     }
+
+    @Override
+    public String toString() {
+        return "CloudDisk [name=" + name + ", link=" + link + ", code=" + code + ", resInfo=" + resInfo + "]";
+    }
     
 }
