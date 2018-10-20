@@ -11,43 +11,26 @@ import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StreamUtils;
-import org.springframework.util.StringUtils;
 
 import com.google.common.collect.Lists;
 import com.magina.resource.domain.Image;
 import com.magina.resource.repository.ImageRepository;
 
-import net.coobird.thumbnailator.Thumbnails;
-import net.coobird.thumbnailator.name.Rename;
-
 @Service
-public class ImageService {
-    
-    // 获取img标签正则  
-    private static final String IMG_NODE_REG = "<(img|IMG)(.*?)(/>|></img>|>)";
-    // 获取src路径的正则  
-    private static final String IMG_SRC_REG = "(src|SRC)=(\"|\')(.*?)(\"|\')";
-    
+public class HtmlService {
+
     @Autowired
     private ImageRepository imageRepository;
-    
-    public Page<Image> listImages(Pageable pageable, String query) {
-        return StringUtils.hasText(query) ? imageRepository.findByNameLike(query, pageable) : imageRepository.findAll(pageable);
-    }
-    
-    public void save(Image image) {
-        imageRepository.save(image);
-    }
-    
+
     public void download() throws IOException {
         List<Image> images = imageRepository.findByUsed(false);
         Map<String, List<Image>> map = images.stream().collect(Collectors.groupingBy(Image::getName));
@@ -57,10 +40,12 @@ public class ImageService {
             int index = 0;
             for (Image image : images) {
                 String html = getHtml(image.getLink());
-                //获取图片标签  
-                List<String> imgNodes = listImageNodes(html);
-                //获取图片src地址  
-                List<String> imgSrcs = listImageSrcs(imgNodes);
+                Document doc = Jsoup.parse(html);
+                Elements es = doc.getElementsByTag("img");
+                List<String> imgSrcs = Lists.newArrayList();
+                for(Element e : es) {   
+                    imgSrcs.add(e.attr("src"));
+                }
                 //下载图片  
                 index = download(folder, index + 1, imgSrcs);
                 if (index != 0) { //下载成功
@@ -70,7 +55,7 @@ public class ImageService {
             }
         }
     }
-    
+
     /***
      * 获取HTML内容
      */
@@ -81,32 +66,6 @@ public class ImageService {
         } catch (Exception e) {
             return null;
         }
-    }
-
-    /***
-     * 获取ImageUrl地址
-     */
-    private List<String> listImageNodes(String html) {
-        Matcher matcher = Pattern.compile(IMG_NODE_REG).matcher(html);
-        List<String> imgUrls = Lists.newArrayList();
-        while (matcher.find()) {
-            imgUrls.add(matcher.group(2));
-        }
-        return imgUrls;
-    }
-
-    /***
-     * 获取ImageSrc地址
-     */
-    private List<String> listImageSrcs(List<String> imageUrls) {
-        List<String> imgSrcs = Lists.newArrayList();
-        imageUrls.forEach(image -> {
-            Matcher matcher = Pattern.compile(IMG_SRC_REG).matcher(image);
-            while (matcher.find()) {
-                imgSrcs.add(matcher.group(3));
-            }
-        });
-        return imgSrcs;
     }
 
     /***
@@ -144,8 +103,4 @@ public class ImageService {
         return connection;
     }
 
-    public static void main(String[] args) throws IOException {
-        Thumbnails.of(new File("D:\\生活照.jpg")).forceSize(890, 1270).outputQuality(1.0).outputFormat("jpg").toFiles(Rename.PREFIX_DOT_THUMBNAIL);
-    }
-    
 }

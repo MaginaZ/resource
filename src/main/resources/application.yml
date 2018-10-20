@@ -12,7 +12,7 @@ logging:
     file: logs/resource.log
 
 database:
-    host: 10.1.1.134
+    host: 10.1.1.39
     port: 3306
     name: common
 
